@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
 starttime = datetime.datetime.now()
 
-folder = "F:/0000-Important/UnderwaterImageEnhancement/EnhancementofUnderwaterImages"
+folder = "/home/hzc/CodeRepository/UnderwaterEnhancement/TraditionalMethod/PhysicalModel/Enhancement-of-Underwater-Images-with-Statistical-Model-of-BL-and-Optimization-of-TM"
 
 path = folder + "/InputImages"
 files = os.listdir(path)
@@ -27,6 +27,7 @@ files =  natsort.natsorted(files)
 for i in range(len(files)):
     file = files[i]
     filepath = path + "/" + file
+    print('Filepath:', filepath)
     prefix = file.split('.')[0]
     if os.path.isfile(filepath):
         print('********    file   ********',file)
@@ -59,7 +60,9 @@ for i in range(len(files)):
         transmission = Refinedtransmission(transmissionB, transmissionG, transmissionR_Stretched, img)
         sceneRadiance = sceneRadianceRGB(img, transmission, AtomsphericLight)
         sceneRadiance = OptimalParameter(sceneRadiance)
-        cv2.imwrite('OutputImages/' + prefix + '_SMBLOTMOP.jpg', sceneRadiance)
+        output_path = folder + '/OutputImages/' + prefix + '_SMBLOTMOP.jpg'
+        print('Output Path:', output_path)
+        cv2.imwrite(output_path, sceneRadiance)
 
 Endtime = datetime.datetime.now()
 Time = Endtime - starttime
